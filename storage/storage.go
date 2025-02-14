@@ -8,7 +8,7 @@ type UserData interface {
 	GetAllUser() ([]*m.User, error)
 	GetUserById(int) (*m.User, error)
 	CreateUser(*m.User) (*m.User, error)
-	UpdateUser(*m.User) (*m.User, error)
+	UpdateUser(*m.User) error
 	DeleteUser(int) error
 }
 
@@ -16,7 +16,7 @@ type Books interface {
 	GetAllBooks() ([]*m.Books, error)
 	GetBooksByIsbm(int) (*m.Books, error)
 	CreateBooks(*m.Books) (*m.Books, error)
-	UpdateBooks(*m.Books) (*m.Books, error)
+	UpdateBooks(*m.Books) error
 	DeleteBooks(int) error
 }
 
