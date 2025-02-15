@@ -4,7 +4,7 @@ import "time"
 
 type User struct {
 	Id        int       `json:"id"`
-	Username  string    `json:"username"`
+	Name      string    `json:"username"`
 	Email     string    `json:"email"`
 	Phone     string    `json:"phone"`
 	IsActive  bool      `json:"is_active"`
