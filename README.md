@@ -1,3 +1,7 @@
+## Project Layout
+
+The starter kit uses the following project layout:
+```
 library/
 ├─ api/
 │  ├─ handlers/
@@ -13,3 +17,4 @@ library/
 │  ├─ postres_test.go
 │  ├─ user_test.go
 ├─ main.go
+```
