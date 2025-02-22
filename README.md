@@ -12,30 +12,61 @@ library/
 │   │   ├── models.go
 │   ├── repositories/
 │   │   ├── student_repo.go
+│   │   ├── book_repo.go
+│   │   ├── borrowed_book_repo.go
+│   │   ├── genre_repo.go
+│   │   ├── author_repo.go
 │   ├── services/
 │   │   ├── student_service.go
+│   │   ├── book_service.go
+│   │   ├── borrowed_book_service.go
+│   │   ├── genre_service.go
+│   │   ├── author_service.go
 │   └── handlers/
 │       ├── api.go
 │       ├── student_handler.go
+│       ├── book_handler.go
+│       ├── borrowed_book_handler.go
+│       ├── genre_handler.go
+│       ├── author_handler.go
 ├── migrations/
 │   └── 001_create_tables.sql
+├── seeds/
+│   └── 001_seed.sql
 ├─  .gitignore
 ├─  Makefile
 ├─  go.sum
 └── go.mod
 ```
 
+### Change (api) with
+- student
+- book
+- borrowed-books
+- author
+- genre
 
-# Create Schema
-
-Run an postgres containter on your local matchine 
-
-**Make a migration folder in your postgres container**
-
+#### Get items
+```http
+  GET /api/items
 ```
-docker exec -it <containter_id> mkdir -p /migrations
+
+#### Get item
+```http
+  GET /api/items/${id}
 ```
-**Make schema**
+
+#### Create item
+```http
+  GET /api/new
 ```
-docker cp /path/to/your/go/project/migrations/001_create_tables.sql 9a3d46eb3b8d:/migrations/001_create_tables.sql
-````
+
+#### Delete item
+```http
+  GET /api/delete/${id}
+```
+
+#### Update item
+```http
+  GET /api/update/${id}
+```
