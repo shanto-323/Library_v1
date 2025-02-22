@@ -5,21 +5,21 @@ import (
 	"gorm.io/gorm"
 )
 
-type StudentRepo struct {
+type StudentRepository struct {
 	db *gorm.DB
 }
 
-func NewStudentRepo(db *gorm.DB) *StudentRepo {
-	return &StudentRepo{
+func NewStudentRepo(db *gorm.DB) *StudentRepository {
+	return &StudentRepository{
 		db: db,
 	}
 }
 
-func (s *StudentRepo) CreateStudent(student *models.Student) error {
+func (s *StudentRepository) Create(student *models.Student) error {
 	return s.db.Create(student).Error
 }
 
-func (s *StudentRepo) GetAllStudent() ([]*models.Student, error) {
+func (s *StudentRepository) GetAll() ([]*models.Student, error) {
 	var students []*models.Student
 	if err := s.db.Find(&students).Error; err != nil {
 		return nil, err
@@ -27,18 +27,18 @@ func (s *StudentRepo) GetAllStudent() ([]*models.Student, error) {
 	return students, nil
 }
 
-func (s *StudentRepo) GetStudentById(id uint) (*models.Student, error) {
+func (s *StudentRepository) GetById(id uint) (*models.Student, error) {
 	var student *models.Student
-	if err := s.db.First(student, id).Error; err != nil {
+	if err := s.db.First(&student, id).Error; err != nil {
 		return nil, err
 	}
 	return student, nil
 }
 
-func (s *StudentRepo) Update(student *models.Student) error {
+func (s *StudentRepository) Update(student *models.Student) error {
 	return s.db.Save(student).Error
 }
 
-func (s *StudentRepo) Delete(id uint) error {
+func (s *StudentRepository) Delete(id uint) error {
 	return s.db.Delete(&models.Student{}, id).Error
 }

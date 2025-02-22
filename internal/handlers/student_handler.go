@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
 
 	"github.com/shanto-323/Library_v1.git/internal/models"
@@ -16,7 +17,8 @@ func NewStudentHandler(service *services.StudentService) *StudentHandler {
 	return &StudentHandler{Service: service}
 }
 
-func (h *StudentHandler) CreateStudent(w http.ResponseWriter, r *http.Request) error {
+// CREATE
+func (h *StudentHandler) CreateStudentHandler(w http.ResponseWriter, r *http.Request) error {
 	var student models.Student
 	if err := json.NewDecoder(r.Body).Decode(&student); err != nil {
 		return err
@@ -31,8 +33,10 @@ func (h *StudentHandler) CreateStudent(w http.ResponseWriter, r *http.Request) e
 	return nil
 }
 
-func (h *StudentHandler) GetStudentByID(w http.ResponseWriter, r *http.Request) error {
+// GETSTUDENTBYID
+func (h *StudentHandler) GetStudentByIDHandler(w http.ResponseWriter, r *http.Request) error {
 	id, err := getId(r)
+	fmt.Println(id)
 	if err != nil {
 		return err
 	}
@@ -46,7 +50,8 @@ func (h *StudentHandler) GetStudentByID(w http.ResponseWriter, r *http.Request) 
 	return nil
 }
 
-func (h *StudentHandler) GetAllStudents(w http.ResponseWriter, r *http.Request) error {
+// GETALL
+func (h *StudentHandler) GetAllStudentsHandler(w http.ResponseWriter, r *http.Request) error {
 	students, err := h.Service.GetAllStudent()
 	if err != nil {
 		return err
@@ -55,19 +60,20 @@ func (h *StudentHandler) GetAllStudents(w http.ResponseWriter, r *http.Request) 
 	return nil
 }
 
-func (h *StudentHandler) UpdateStudent(w http.ResponseWriter, r *http.Request) error {
+// UPDATE
+func (h *StudentHandler) UpdateStudentHandler(w http.ResponseWriter, r *http.Request) error {
 	id, err := getId(r)
 	if err != nil {
 		return err
 	}
 
-	var student models.Student
+	var student *models.Student
 	if err := json.NewDecoder(r.Body).Decode(&student); err != nil {
 		return err
 	}
 
 	student.ID = uint(id)
-	if err := h.Service.UpdateStudent(&student); err != nil {
+	if err := h.Service.UpdateStudent(student); err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return err
 	}
@@ -76,7 +82,8 @@ func (h *StudentHandler) UpdateStudent(w http.ResponseWriter, r *http.Request) e
 	return nil
 }
 
-func (h *StudentHandler) DeleteStudent(w http.ResponseWriter, r *http.Request) error {
+// DELETE
+func (h *StudentHandler) DeleteStudentHandler(w http.ResponseWriter, r *http.Request) error {
 	id, err := getId(r)
 	if err != nil {
 		return nil

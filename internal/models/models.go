@@ -43,7 +43,7 @@ type BorrowedBook struct {
 	StudentID uint      `gorm:"not null"`
 	BookISBN  string    `gorm:"not null"`
 	TakenAt   time.Time `gorm:"autoCreateTime"`
-	ReturnAt  int64     `gorm:"not null"`
+	ReturnAt  time.Time `gorm:"not null"`
 	Returned  bool      `gorm:"default:false"`
 	Student   Student   `gorm:"foreignKey:StudentID;constraint:OnDelete:CASCADE;"`
 	Book      Book      `gorm:"foreignKey:BookISBN;references:ISBN;constraint:OnDelete:CASCADE;"`
